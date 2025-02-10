@@ -1,5 +1,10 @@
 package org.xomishin.courseSpringApp.сonfig;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class MySpringMVCServlet  extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -16,5 +21,18 @@ public class MySpringMVCServlet  extends AbstractAnnotationConfigDispatcherServl
     @Override
     protected String[] getServletMappings() {
         return new String[] {"/"};
+    }
+
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        // Регистрация HiddenHttpMethodFilter для обработки PATCH/PUT/DELETE
+        registerHiddenHttpMethodFilter(servletContext);
+    }
+
+    private void registerHiddenHttpMethodFilter(ServletContext context) {
+        context.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter())
+                .addMappingForUrlPatterns(null, true, "/*");
     }
 }
