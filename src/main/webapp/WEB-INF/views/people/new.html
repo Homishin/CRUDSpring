@@ -1,15 +1,102 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add person</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Person</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f2f5;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a73e8;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #5f6368;
+            font-weight: 500;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #dadce0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #1557b0;
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <form th:method="POST" th:action="@{/people}" th:object="${person}">
-    <label for="name">Add name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
-    <br/>
-    <input type="submit" value="Create">
-  </form>
+<div class="form-container">
+    <h1>Create New Person</h1>
+    <form th:method="POST" th:action="@{/people}" th:object="${person}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Enter name">
+        </div>
+        <button type="submit" class="submit-btn">Create Profile</button>
+    </form>
+</div>
 </body>
 </html>

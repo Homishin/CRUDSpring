@@ -2,17 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Все люди</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Directory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            color: #1a73e8;
+            font-size: 2rem;
+        }
+
+        .people-list {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .person-item {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s ease;
+        }
+
+        .person-item:last-child {
+            border-bottom: none;
+        }
+
+        .person-item:hover {
+            background: #f8f9fa;
+        }
+
+        .person-link {
+            text-decoration: none;
+            color: #212529;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .person-link:hover {
+            color: #1a73e8;
+        }
+
+        .create-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: #1a73e8;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .create-btn:hover {
+            background: #1557b0;
+        }
+
+        .user-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <h1 class="page-title">People Directory</h1>
+        <a href="/people/new" class="create-btn">
+            <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/>
+            </svg>
+            Create New
+        </a>
+    </div>
 
-<div th:each="person : ${people}">
-  <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+    <div class="people-list">
+        <div th:each="person : ${people}" class="person-item">
+            <a th:href="@{/people/{id}(id=${person.getId()})}" class="person-link">
+                <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-3.123 0-5.914-1.441-7.749-3.69.259-.588.783-.995 1.499-1.244 1.418-.506 3.259-.941 3.259-.941s.847 1.246 2.988 1.246c2.141 0 2.988-1.246 2.988-1.246s1.842.435 3.262.941c.715.25 1.238.657 1.496 1.244-1.835 2.249-4.626 3.69-7.749 3.69zm0-21c2.198 0 4 1.803 4 4s-1.802 4-4 4-4-1.803-4-4 1.802-4 4-4zm0 2c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2z"/>
+                </svg>
+                <span th:text="${person.getName()}">User Name</span>
+            </a>
+        </div>
+    </div>
 </div>
-
-<br>
-
-<a href="/people/new">Create new Person</a>
-
 </body>
 </html>
