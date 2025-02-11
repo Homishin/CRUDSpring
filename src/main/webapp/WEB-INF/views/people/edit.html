@@ -94,6 +94,17 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" th:field="*{name}" id="name" placeholder="Enter new name">
+            <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Age</label>
+            <input type="text" th:field="*{age}" id="age" placeholder="Enter new age">
+            <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{email}" id="email" placeholder="Enter new email">
+            <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
         </div>
         <button type="submit" class="submit-btn">Update Profile</button>
     </form>
